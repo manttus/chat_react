@@ -1,1 +1,1 @@
-export const baseURL = "chat-app/api/v1/";
+export const baseURL = "/chat-app/api/v1/";
