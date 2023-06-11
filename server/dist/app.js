@@ -34,6 +34,7 @@ const connection_1 = __importDefault(require("./frameworks/database/mongoDB/conn
 const express_2 = __importDefault(require("./frameworks/webserver/express"));
 const server_1 = __importDefault(require("./frameworks/webserver/server"));
 const socket_1 = __importDefault(require("./frameworks/webserver/socket"));
+const routes_1 = __importDefault(require("./frameworks/webserver/routes"));
 const http_1 = __importDefault(require("http"));
 const socket_io_1 = require("socket.io");
 const app = (0, express_1.default)();
@@ -47,6 +48,7 @@ const io = new socket_io_1.Server(server, {
 (0, connection_1.default)(mongoose_1.default).connectToMongo();
 (0, express_2.default)(app, express_1.json, cors_1.default);
 (0, socket_1.default)(io);
+(0, routes_1.default)(app, express_1.default);
 const serverConf = (0, server_1.default)(app, server);
 serverConf.startServer();
 serverConf.startSocketServer();
