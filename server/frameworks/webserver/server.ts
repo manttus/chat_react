@@ -1,4 +1,3 @@
-import { Server } from "socket.io";
 import { config } from "../../config/config";
 import { AppType } from "../../types/express.types";
 
