@@ -1,4 +1,3 @@
-import mongoose from "mongoose";
 import authController from "../../../controllers/authController";
 import { ExpressType } from "../../../types/express";
 import authService from "../../../application/services/authService";
