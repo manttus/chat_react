@@ -1,5 +1,5 @@
 import { config } from "../../../config/config";
-import { MongooseType } from "../../../types/mongo.types";
+import { MongooseType } from "../../../types/mongo";
 
 const connection = (mongoose: MongooseType) => {
   const connectToMongo = () => {

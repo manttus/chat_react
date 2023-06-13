@@ -1,5 +1,5 @@
 import { config } from "../../config/config";
-import { AppType } from "../../types/express.types";
+import { AppType } from "../../types/express";
 
 const serverConfig = (app: AppType, server: any) => {
   const startServer = () => {
