@@ -1,5 +1,5 @@
 import { baseURL } from "../../../constants/baseURL";
-import { AppType, ExpressType } from "../../../types/express.types";
+import { AppType, ExpressType } from "../../../types/express";
 import authRouter from "./auth";
 
 const routes = (app: AppType, express: ExpressType) => {
