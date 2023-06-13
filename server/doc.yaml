@@ -1,0 +1,183 @@
+openapi: 3.0.3
+info:
+  title: Chat App -
+  description: |-
+    The Real-Time Chat Application is a secure and interactive platform that allows
+    users to engage in real-time conversations. With its authentication functionality
+    and integration of JWT tokens, users can create accounts, log in securely, and
+    access the chat features. Leveraging the power of WebSockets, the application
+    provides seamless real-time communication between users, ensuring instant message
+    delivery and an immersive chat experience.
+
+    Some useful links:
+    - [The Chat App Repository](https://github.com/manttus/chat_react)
+  contact:
+    email: basnetraymonn@gmail.com
+  version: 1.0.0
+servers:
+  - url: https://consultancy-temp-service.onrender.com/chat-app/api/v1/
+  - url: http://localhost:5000/chat-app/api/v1/
+tags:
+  # - name: User
+  #   description: Operation for Users
+  - name: Authentication
+    description: Authentication for Users
+  - name: OTP
+    description: One Time Password for Users
+paths:
+  /otp/sendOtp:
+    post:
+      tags:
+        - OTP
+      requestBody:
+        requiredL: true
+        content:
+          application/json:
+  /auth/login:
+    post:
+      tags:
+        - Authentication
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              properties:
+                email:
+                  title: email
+                  example: basnetraymonn@gmail.com
+                  type: string
+                password:
+                  title: password
+                  example: 73-55-608Cyka
+                  type: string
+      responses:
+        "200":
+          description: Success
+          content:
+            application/json:
+              schema:
+                properties:
+                  access:
+                    example: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiIxMjM0NTY3ODkwIiwidXNlcm5hbWUiOiJleGFtcGxlVXNlciIsImlhdCI6MTYyMzIxMDc2MSwiZXhwIjoxNjIzMj
+                    type: string
+                  refresh:
+                    example: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiIxMjM0NTY3ODkwIiwidXNlcm5hbWUiOiJleGFtcGxlVXNlciIsImlhdCI6MTYyMzIxMDc2MSwiZXhwIjoxNjIzMj
+                    type: string
+        "400":
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                properties:
+                  message:
+                    type: string
+                    example: "Invalid Credentials"
+        "500":
+          description: Internal Server Error
+          content:
+            application/json:
+              schema:
+                properties:
+                  message:
+                    type: string
+                    example: "Server Error"
+  /auth/register:
+    post:
+      tags:
+        - Authentication
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              properties:
+                username:
+                  title: username
+                  example: mantuu
+                  type: string
+                email:
+                  title: email
+                  example: basnetraymonn@gmail.com
+                  type: string
+                password:
+                  title: password
+                  example: 73-55-608Cyka
+                  type: string
+
+      responses:
+        "200":
+          description: Success
+          content:
+            application/json:
+              schema:
+                properties:
+                  access:
+                    type: string
+                    example: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiIxMjM0NTY3ODkwIiwidXNlcm5hbWUiOiJleGFtcGxlVXNlciIsImlhdCI6MTYyMzIxMDc2MSwiZXhwIjoxNjIzMj
+                  refresh:
+                    type: string
+                    example: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiIxMjM0NTY3ODkwIiwidXNlcm5hbWUiOiJleGFtcGxlVXNlciIsImlhdCI6MTYyMzIxMDc2MSwiZXhwIjoxNjIzMj
+
+        "400":
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                properties:
+                  message:
+                    type: string
+                    example: "Invalid Credentials"
+        "500":
+          description: Internal Server Error
+          content:
+            application/json:
+              schema:
+                properties:
+                  message:
+                    type: string
+                    example: "Server Error"
+  /auth/token:
+    post:
+      tags:
+        - Authentication
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              properties:
+                token:
+                  title: token
+                  example: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiIxMjM0NTY3ODkwIiwidXNlcm5hbWUiOiJleGFtcGxlVXNlciIsImlhdCI6MTYyMzIxMDc2MSwiZXhwIjoxNjIzMj
+                  type: string
+
+      responses:
+        "200":
+          description: Success
+          content:
+            application/json:
+              schema:
+                properties:
+                  access:
+                    type: string
+                    example: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiIxMjM0NTY3ODkwIiwidXNlcm5hbWUiOiJleGFtcGxlVXNlciIsImlhdCI6MTYyMzIxMDc2MSwiZXhwIjoxNjIzMj
+
+        "400":
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                properties:
+                  message:
+                    type: string
+                    example: "Invalid Credentials"
+        "500":
+          description: Internal Server Error
+          content:
+            application/json:
+              schema:
+                properties:
+                  message:
+                    type: string
+                    example: "Server Error"
