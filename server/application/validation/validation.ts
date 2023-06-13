@@ -18,6 +18,8 @@ export const customField = (field: string, type: string) => {
         .trim()
         .isLength({ min: 8, max: 15 })
         .withMessage("Invalid password");
+    case FieldsEnum.Nullable:
+      return body(field).optional().trim();
     default:
       return body(field).notEmpty().trim();
   }
