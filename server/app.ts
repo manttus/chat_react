@@ -1,3 +1,4 @@
+import { baseURL } from "./constants/baseURL";
 import "dotenv/config";
 import express, { json } from "express";
 import cors from "cors";
@@ -9,8 +10,13 @@ import socketConfig from "./frameworks/webserver/socket";
 import routes from "./frameworks/webserver/routes";
 import http from "http";
 import { Server } from "socket.io";
+import YAML from "yamljs";
+import swaggerUi from "swagger-ui-express";
 
 const app = express();
+const swagger = YAML.load("./doc.yaml");
+app.use(`${baseURL}docs`, swaggerUi.serve, swaggerUi.setup(swagger));
+
 const server = http.createServer(app);
 const io = new Server(server, {
   cors: {
