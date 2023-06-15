@@ -1,10 +1,10 @@
-import jwt, { sign } from "jsonwebtoken";
+import jwt from "jsonwebtoken";
 import { compare, hash } from "bcrypt";
 
 const authService = () => {
   const generateToken = (
     user: { email: string },
-    signature: string,
+    signature: string, 
     expires: { expiresIn: string }
   ) => {
     const token = jwt.sign(user, signature, expires);
