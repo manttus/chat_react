@@ -1,8 +1,7 @@
-import { CustomError } from "../../../types/error";
 import { NextType, RequestType, ResponseType } from "../../../types/express";
 
 const errorHandlingMiddleware = (
-  err: CustomError,
+  err: any,
   _: RequestType,
   res: ResponseType,
   next: NextType
