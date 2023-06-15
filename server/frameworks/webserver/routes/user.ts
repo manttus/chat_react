@@ -12,15 +12,15 @@ const userRouter = (express: ExpressType) => {
   const { profileUser, updateUser, deleteUser } = userController();
   router.get("/profile", authorization, profileUser);
   router.put(
-    "/update/:id",
+    "/update",
     [
-      customParams("hash"),
       customField("username", FieldsEnum.Others),
       customField("image", FieldsEnum.Others),
     ],
+    authorization,
     updateUser
   );
-  router.delete("/update/:id", [customParams("hash")], deleteUser);
+  router.delete("/delete", authorization, deleteUser);
   return router;
 };
 
