@@ -15,7 +15,7 @@ info:
     email: basnetraymonn@gmail.com
   version: 1.0.0
 servers:
-  - url: https://consultancy-temp-service.onrender.com/chat-app/api/v1/
+  - url: https://chat-react-dmcd.onrender.com/chat-app/api/v1/
   - url: http://localhost:5000/chat-app/api/v1/
 tags:
   # - name: User
@@ -23,16 +23,389 @@ tags:
   - name: Authentication
     description: Authentication for Users
   - name: OTP
-    description: One Time Password for Users
+    description: One Time Passwords for Users
+  - name: User
+    description: User Configurations
 paths:
+  /user/delete:
+    delete:
+      tags:
+        - User
+      parameters:
+        - name: Authorization
+          in: header
+          required: true
+          schema:
+            type: string
+      responses:
+        "200":
+          description: Success
+          content:
+            application/json:
+              schema:
+                properties:
+                  message:
+                    example: "User Removed"
+                    type: string
+        "400":
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                properties:
+                  message:
+                    example: "Invalid Credentials"
+        "401":
+          description: UnAuthorized
+          content:
+            application/json:
+              schema:
+                properties:
+                  message:
+                    example: "UnAuthorized"
+        "500":
+          description: Server Error
+          content:
+            application/json:
+              schema:
+                properties:
+                  message:
+                    example: "Internal Server Error"
+  /user/update:
+    put:
+      tags:
+        - User
+      parameters:
+        - name: Authorization
+          in: header
+          required: true
+          schema:
+            type: string
+      responses:
+        "200":
+          description: Success
+          content:
+            application/json:
+              schema:
+                properties:
+                  message:
+                    example: "User Updated"
+                    type: string
+        "400":
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                properties:
+                  message:
+                    example: "Invalid Credentials"
+                  error:
+                    example:
+                      type: "field"
+                      value: ""
+                      msg: "Field cannot be empty"
+                      path: "email"
+                      location: "body"
+                    nullable: true
+                    description: "This field can be undefined"
+
+        "401":
+          description: UnAuthorized
+          content:
+            application/json:
+              schema:
+                properties:
+                  message:
+                    example: "UnAuthorized"
+
+        "500":
+          description: Server Error
+          content:
+            application/json:
+              schema:
+                properties:
+                  message:
+                    example: "Internal Server Error"
+  /user/profile:
+    get:
+      tags:
+        - User
+      parameters:
+        - name: Authorization
+          in: header
+          required: true
+          schema:
+            type: string
+      responses:
+        "200":
+          description: Success
+          content:
+            application/json:
+              schema:
+                properties:
+                  email:
+                    example: "basnetraymonn@gmail.com"
+                    type: string
+                  image:
+                    example: "https://brrrrrrr.png"
+                    type: string
+                  username:
+                    example: "mantuu"
+                    type: string
+                  groups:
+                    type: array
+                    items:
+                      example: "69696969"
+                      type: string
+        "400":
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                properties:
+                  message:
+                    example: "Invalid Credentials"
+                  error:
+                    example:
+                      type: "field"
+                      value: ""
+                      msg: "Field cannot be empty"
+                      path: "email"
+                      location: "body"
+                    nullable: true
+                    description: "This field can be undefined"
+
+        "401":
+          description: UnAuthorized
+          content:
+            application/json:
+              schema:
+                properties:
+                  message:
+                    example: "UnAuthorized"
+
+        "500":
+          description: Server Error
+          content:
+            application/json:
+              schema:
+                properties:
+                  message:
+                    example: "Internal Server Error"
+
+  /otp/verifyLink/{hash}:
+    get:
+      tags:
+        - OTP
+      parameters:
+        - name: hash
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        "200":
+          description: Success
+          content:
+            application/json:
+              schema:
+                properties:
+                  message:
+                    example: "Email Verified"
+        "400":
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                properties:
+                  message:
+                    example: "Invalid Credentials"
+                  error:
+                    example:
+                      type: "field"
+                      value: ""
+                      msg: "Field cannot be empty"
+                      path: "email"
+                      location: "body"
+                    nullable: true
+                    description: "This field can be undefined"
+
+        "401":
+          description: UnAuthorized
+          content:
+            application/json:
+              schema:
+                properties:
+                  message:
+                    example: "UnAuthorized"
+
+        "500":
+          description: Server Error
+          content:
+            application/json:
+              schema:
+                properties:
+                  message:
+                    example: "Internal Server Error"
   /otp/sendOtp:
     post:
       tags:
         - OTP
       requestBody:
-        requiredL: true
+        required: true
         content:
           application/json:
+            schema:
+              properties:
+                email:
+                  title: email
+                  example: basnetraymonn@gmail.com
+                  type: string
+      responses:
+        "200":
+          description: Success
+          content:
+            application/json:
+              schema:
+                properties:
+                  message:
+                    example: "Email Sent"
+        "400":
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                properties:
+                  message:
+                    example: "Invalid Credentials"
+                  error:
+                    example:
+                      type: "field"
+                      value: ""
+                      msg: "Field cannot be empty"
+                      path: "email"
+                      location: "body"
+                    nullable: true
+                    description: "This field can be undefined"
+
+        "409":
+          description: Conflict Error
+          content:
+            application/json:
+              schema:
+                properties:
+                  message:
+                    example: "Email Already Sent"
+
+        "500":
+          description: Server Error
+          content:
+            application/json:
+              schema:
+                properties:
+                  message:
+                    example: "Internal Server Error"
+  /otp/authOtp:
+    post:
+      tags:
+        - OTP
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              properties:
+                email:
+                  title: email
+                  example: basnetraymonn@gmail.com
+                  type: string
+      responses:
+        "200":
+          description: Success
+          content:
+            application/json:
+              schema:
+                properties:
+                  message:
+                    example: "Email Sent"
+        "400":
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                properties:
+                  message:
+                    example: "Invalid Credentials"
+                  error:
+                    example:
+                      type: "field"
+                      value: ""
+                      msg: "Field cannot be empty"
+                      path: "email"
+                      location: "body"
+                    nullable: true
+                    description: "This field can be undefined"
+  /otp/verifyOtp:
+    post:
+      tags:
+        - OTP
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              properties:
+                email:
+                  title: email
+                  example: basnetraymonn@gmail.com
+                  type: string
+                otp:
+                  title: otp
+                  example: 956740
+                  type: string
+      responses:
+        "200":
+          description: Success
+          content:
+            application/json:
+              schema:
+                properties:
+                  message:
+                    example: "Email Verified"
+        "400":
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                properties:
+                  message:
+                    example: "Invalid Credentials"
+                  error:
+                    example:
+                      type: "field"
+                      value: ""
+                      msg: "Field cannot be empty"
+                      path: "email"
+                      location: "body"
+                    nullable: true
+                    description: "This field can be undefined"
+        "409":
+          description: Conflict Error
+          content:
+            application/json:
+              schema:
+                properties:
+                  message:
+                    example: "Email Already Sent"
+        "500":
+          description: Server Error
+          content:
+            application/json:
+              schema:
+                properties:
+                  message:
+                    example: "Internal Server Error"
+
   /auth/login:
     post:
       tags:
@@ -73,6 +446,15 @@ paths:
                   message:
                     type: string
                     example: "Invalid Credentials"
+                  error:
+                    example:
+                      type: "field"
+                      value: ""
+                      msg: "Field cannot be empty"
+                      path: "email"
+                      location: "body"
+                    nullable: true
+                    description: "This field can be undefined"
         "500":
           description: Internal Server Error
           content:
@@ -128,6 +510,15 @@ paths:
                   message:
                     type: string
                     example: "Invalid Credentials"
+                  error:
+                    example:
+                      type: "field"
+                      value: ""
+                      msg: "Field cannot be empty"
+                      path: "email"
+                      location: "body"
+                    nullable: true
+                    description: "This field can be undefined"
         "500":
           description: Internal Server Error
           content:
@@ -172,6 +563,71 @@ paths:
                   message:
                     type: string
                     example: "Invalid Credentials"
+                  error:
+                    example:
+                      type: "field"
+                      value: ""
+                      msg: "Field cannot be empty"
+                      path: "email"
+                      location: "body"
+                    nullable: true
+                    description: "This field can be undefined"
+        "500":
+          description: Internal Server Error
+          content:
+            application/json:
+              schema:
+                properties:
+                  message:
+                    type: string
+                    example: "Server Error"
+  /auth/reset:
+    patch:
+      tags:
+        - Authentication
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              properties:
+                email:
+                  title: email
+                  example: basnetraymonn@gmail.com
+
+                new_password:
+                  title: password
+                  example: 73-55-608
+                  type: string
+      responses:
+        "200":
+          description: Success
+          content:
+            application/json:
+              schema:
+                properties:
+                  message:
+                    type: string
+                    example: "Password Updated"
+
+        "400":
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                properties:
+                  message:
+                    type: string
+                    example: "Invalid Credentials"
+                  error:
+                    example:
+                      type: "field"
+                      value: ""
+                      msg: "Field cannot be empty"
+                      path: "email"
+                      location: "body"
+                    nullable: true
+                    description: "This field can be undefined"
         "500":
           description: Internal Server Error
           content:
