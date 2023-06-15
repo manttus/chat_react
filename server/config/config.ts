@@ -1,5 +1,7 @@
 const mongo_url = process.env.MONGO_URL;
 const port = process.env.PORT;
+const user = process.env.APP_EMAIL;
+const pass = process.env.APP_KEY;
 const socket = process.env.SOCKET;
 const secret = process.env.SECRET;
 const refresh = process.env.REFRESH;
@@ -13,4 +15,11 @@ export const config = {
   socket: socket || 3001,
   secret: secret || "GGG",
   refresh: refresh || "FFF",
+  mailConfig: {
+    service: "gmail",
+    auth: {
+      user: user,
+      pass: pass,
+    },
+  },
 };
