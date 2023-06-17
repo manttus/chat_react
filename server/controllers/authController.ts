@@ -35,8 +35,8 @@ const authController = (authService: Function) => {
         config.refresh,
         { expiresIn: "5m" }
       );
-      res.cookie("access", accessToken, { httpOnly: true, secure: true });
-      res.cookie("refresh", refreshToken, { httpOnly: true, secure: true });
+      res.cookie("access", accessToken, { httpOnly: true });
+      res.cookie("refresh", refreshToken, { httpOnly: true });
       return res
         .status(200)
         .send({ access: accessToken, refresh: refreshToken });
