@@ -11,6 +11,7 @@ const authController = (authService: Function) => {
       return res
         .status(400)
         .send({ message: ResponseEnum.Invalid_Cred, error: error.array()[0] });
+    console.log(req.cookies);
     try {
       const isExist = await User.findOne({ email: req.body.email });
       if (!isExist)
@@ -35,8 +36,14 @@ const authController = (authService: Function) => {
         config.refresh,
         { expiresIn: "5m" }
       );
-      res.cookie("access", accessToken, { httpOnly: true });
-      res.cookie("refresh", refreshToken, { httpOnly: true });
+      res.cookie("access", accessToken, {
+        httpOnly: true,
+        secure: true,
+      });
+      res.cookie("refresh", refreshToken, {
+        httpOnly: true,
+        secure: true,
+      });
       return res
         .status(200)
         .send({ access: accessToken, refresh: refreshToken });
