@@ -15,9 +15,13 @@ const AuthBar = () => {
         </div>
         <div className="flex justify-end">
           <CustomButton
-            text={location.pathname === "/" ? "Create an Account" : "Log In"}
+            text={
+              location.pathname === "/login" ? "Create an Account" : "Log In"
+            }
             onClick={() => {
-              location.pathname === "/" ? navigate("/register") : navigate("/");
+              location.pathname === "/login"
+                ? navigate("/register")
+                : navigate("/login");
             }}
           />
         </div>

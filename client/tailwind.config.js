@@ -5,6 +5,10 @@ export default {
     extend: {
       colors: {
         primary: "#3361FF",
+        secondary: "#f8f8ff",
+      },
+      fontFamily: {
+        sans: ["ui-sans-serif", "system-ui"],
       },
     },
   },

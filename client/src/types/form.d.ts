@@ -5,7 +5,11 @@ type LoginFormType = {
 
 type RegisterFormType = {
   username: string;
-    email: string;
-    password: string;
-    confirm_password: string;
+  email: string;
+  password: string;
+  confirm_password: string;
+};
+
+type MessageFormType = {
+  message: string;
 };

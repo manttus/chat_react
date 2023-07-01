@@ -4,6 +4,7 @@ type CustomFieldProps<T> = {
   onFocus?: () => void;
   isValid?: boolean | undefined;
   register: T;
+  width?: string;
 };
 
 const CustomField = <T,>({
@@ -15,7 +16,7 @@ const CustomField = <T,>({
 }: CustomFieldProps<T>) => {
   const style = `p-2 border ${
     !isValid ? "border-red-400" : "border-gray-300"
-  } rounded-md placeholder:text-sm focus:outline-primary`;
+  } rounded-md text-sm focus:outline-primary w-full`;
   return (
     <input
       {...register}
