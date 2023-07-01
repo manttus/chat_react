@@ -1,3 +1,6 @@
+import multer from "multer";
+import determineFolder from "../helpers/determinFolder";
+
 const mongo_url = process.env.MONGO_URL;
 const port = process.env.PORT;
 const user = process.env.APP_EMAIL;
@@ -22,4 +25,12 @@ export const config = {
       pass: pass,
     },
   },
+  multerConfig: multer.diskStorage({
+    destination: (req, _, cb) => {
+      cb(null, determineFolder(req.body.catergory));
+    },
+    filename: (_, file, cb) => {
+      cb(null, file.originalname);
+    },
+  }),
 };
