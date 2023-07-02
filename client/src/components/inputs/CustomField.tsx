@@ -14,7 +14,7 @@ const CustomField = <T,>({
   onFocus,
   register,
 }: CustomFieldProps<T>) => {
-  const style = `p-2 border ${
+  const style = `p-3 border ${
     !isValid ? "border-red-400" : "border-gray-300"
   } rounded-md text-sm focus:outline-primary w-full`;
   return (
