@@ -33,7 +33,7 @@ const LoginPage = () => {
       <div className="flex w-full pb-10 justify-center ">
         <HeadingLarge text="Sign In" />
       </div>
-      <div className="flex w-full justify-center">
+      <div className="flex w-full justify-center items-center">
         <LoginForm
           errors={errors}
           submitHandler={submitHandler}

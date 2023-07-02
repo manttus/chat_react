@@ -25,6 +25,7 @@ const LoginForm = ({
 }: LoginFormProps) => {
   return (
     <CustomForm
+      width="w-1/4"
       onSubmit={handleSubmit((data: LoginFormType) => {
         submitHandler(data);
       })}
