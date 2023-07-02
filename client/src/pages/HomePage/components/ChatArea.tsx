@@ -11,14 +11,14 @@ type ChatAreaProps = {
   data: {
     username: string;
     image: string;
-    message: string;
     time: string;
+    messages: [];
   };
 };
 
 const ChatArea = ({ register, data }: ChatAreaProps) => {
   return (
-    <div className="hidden md:flex lg:flex w-3/4 md:w-full min-w-[150px]">
+    <div className="hidden md:flex lg:flex w-3/4 md:w-full min-w-[150px] ">
       <div className="flex flex-col justify-between w-3/4 flex-grow bg-gray-200 ">
         <div className="flex bg-white h-16 w-full border-b border-gray-300 items-center px-4 gap-2">
           <Avatar image={data.image} />
@@ -27,22 +27,20 @@ const ChatArea = ({ register, data }: ChatAreaProps) => {
             <GhostSmall text="Online" />
           </div>
         </div>
-        <div className="flex flex-col flex-grow justify-end py-5 gap-2 overflow-y-scroll no-scrollbar">
-          {/* <MessageBubble message="Hello" sender={true} />
-          <MessageBubble message="Hi" sender={false} />
-          <MessageBubble message="How are you ?" sender={false} />
-          <MessageBubble message="Fine. How about you ?" sender={true} />
-          <MessageBubble message="Brrrrrrrr" sender={false} />
-          <MessageBubble message="Idiot Dog" sender={true} />
-          <MessageBubble
-            message="Brrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrr"
-            sender={true}
-          />
-          <MessageBubble message="u are Idiot dog" sender={false} /> */}
+        <div className="flex-grow h-96 overflow-y-scroll justify-end py-5 gap-2 no-scrollbar">
+          <div className="flex flex-col flex-grow gap-2 items-center justify-center">
+            {data.messages.length === 0 && (
+              <div className="flex flex-col flex-grow justify-center items-center">
+                <div className="bg-white w-full px-5 py-2 shadow-sm border border-gray-300 rounded-md cursor-pointer">
+                  Start Messaging
+                </div>
+              </div>
+            )}
+          </div>
         </div>
         <MessageBox register={register} />
       </div>
-      <ChatRight />
+      <ChatRight data={data} />
     </div>
   );
 };
